@@ -12,7 +12,9 @@ This LCD controller is designed for 20x4 LCD display having I2C interfaces.
 So, to use this project, you need the following components:
 
 1-20x4 LCD display with I2C interface
+
 2-Logic level shifter (3.3V - 5V)
+
 3-some wires 
 
 # How to wire LCD display to Raspberry Pi?
