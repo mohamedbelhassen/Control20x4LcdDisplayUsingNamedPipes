@@ -37,7 +37,7 @@ Then, execute this file using the following command (in the same folder):
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
-Note: You can add the following line toi the crontab using the (crontab -e) command to launch the controller at the starting of the Raspberry Pi
+Note: You can add the following line to the crontab using the (crontab -e) command to launch the controller at the starting of the Raspberry Pi
 
     @reboot   /<here type the full path to the folder containing the folder of the controller>/lcd_controller.py
 
