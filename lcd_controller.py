@@ -14,7 +14,7 @@ import os
 i = 0
 lcdTextContent = ["","","","",""] #L: array containing the text of line1..4  indexed with line number , initially does not contains anything
 textCentering = ["1","1","1","1","1"] # centering: contains centering of text: 1:left 2:center: 3: right
-separator=","
+separator="|"
 #communicate with another process through named pipe
 pipePath ="/tmp/lcd_pipe" #important: this path have to be configured such as it fits your home directory
 
@@ -36,6 +36,7 @@ LCD_LINE_2 = 0xC0 # LCD RAM address for the 2nd line
 LCD_LINE_3 = 0x94 # LCD RAM address for the 3rd line
 LCD_LINE_4 = 0xD4 # LCD RAM address for the 4th line
 
+global LCD_BACKLIGHT
 LCD_BACKLIGHT  = 0x08  # On
 #LCD_BACKLIGHT = 0x00  # Off
 
@@ -125,62 +126,62 @@ def refreshLCD():
 def main():
   # Main program block
   # Initialise display
-    lcd_init()
+	lcd_init()
+	global LCD_BACKLIGHT
 
-
-    while True:
+	while True:
 	
-        rp = open(pipePath, 'r')
-        response = rp.read()
-        rp.close()
-        responseLines=response.split("\n")
-        nbLines = len(responseLines)
-        #print "nb line: %d" % len(responseLines)
-        #print responseLines
-        for i in range(0, nbLines):
-		if len(responseLines[i])==0:
-			continue
-		elif responseLines[i] == "clear":
-			lcd_init()
-			print "LCD display cleared"
-			continue
-		elif responseLines[i] == "refresh":			
-			refreshLCD()
-			continue
-		elif responseLines[i] == "backlight=off":
-			global LCD_BACKLIGHT
-			LCD_BACKLIGHT = 0x00  #Off
-			refreshLCD()
-			print "LCD backlight turned off"
-			continue
-		elif responseLines[i] == "backlight=on":
-			global LCD_BACKLIGHT
-			LCD_BACKLIGHT = 0x08  # On
-			refreshLCD()
-			print "LCD backlight turned on"
-			continue
-		#print "line nb: %d: %s length: %d" % (i, responseLines[i],len(responseLines[i]))
-		sR=responseLines[i].split(separator)
-		#showLine = 1
+		rp = open(pipePath, 'r')
+		response = rp.read()
+		rp.close()
+		responseLines=response.split("\n")
+		nbLines = len(responseLines)
+		#print "nb line: %d" % len(responseLines)
+		#print responseLines
+		for i in range(0, nbLines):
+			if len(responseLines[i])==0:
+				continue
+			elif responseLines[i] == "clear":
+				lcd_init()
+				print "LCD display cleared"
+				continue
+			elif responseLines[i] == "refresh":			
+				refreshLCD()
+				continue
+			elif responseLines[i] == "backlight=off":
+				#global LCD_BACKLIGHT
+				LCD_BACKLIGHT = 0x00  #Off
+				refreshLCD()
+				print "LCD backlight turned off"
+				continue
+			elif responseLines[i] == "backlight=on":
+				#global LCD_BACKLIGHT
+				LCD_BACKLIGHT = 0x08  # On
+				refreshLCD()
+				print "LCD backlight turned on"
+				continue
+			#print "line nb: %d: %s length: %d" % (i, responseLines[i],len(responseLines[i]))
+			sR=responseLines[i].split(separator)
+			#showLine = 1
 
-		if len(sR) != 3 :
-			print "incorrect number of fields %d  lineArgPassed: %s" % (len(sR), responseLines[i])			
-			continue
-		style = int(sR[1])
-		lineNb=int(sR[0])		
+			if len(sR) != 3 :
+				print "incorrect number of fields %d  lineArgPassed: %s" % (len(sR), responseLines[i])			
+				continue
+			style = int(sR[1])
+			lineNb=int(sR[0])		
 
-		if lineNb < 5:
-			lcdTextContent[lineNb]=sR[2]
-			textCentering[lineNb]=sR[1]
-		if len(sR)==3: 
-			if lineNb==1:   				
-				cd_string(sR[2],LCD_LINE_1,style)				
-			elif lineNb==2:
-				lcd_string(sR[2],LCD_LINE_2,style)
-			elif lineNb==3:
-				lcd_string(sR[2],LCD_LINE_3,style)
-			elif lineNb==4:
-				lcd_string(sR[2],LCD_LINE_4,style)
+			if lineNb < 5:
+				lcdTextContent[lineNb]=sR[2]
+				textCentering[lineNb]=sR[1]
+			if len(sR)==3: 
+				if lineNb==1:   				
+					cd_string(sR[2],LCD_LINE_1,style)				
+				elif lineNb==2:
+					lcd_string(sR[2],LCD_LINE_2,style)
+				elif lineNb==3:
+					lcd_string(sR[2],LCD_LINE_3,style)
+				elif lineNb==4:
+					lcd_string(sR[2],LCD_LINE_4,style)
 
 
 if __name__ == '__main__':
@@ -191,5 +192,4 @@ if __name__ == '__main__':
     pass
   finally:
     lcd_byte(0x01, LCD_CMD)
-
 
