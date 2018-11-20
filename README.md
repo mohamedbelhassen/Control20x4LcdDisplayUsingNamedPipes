@@ -48,10 +48,9 @@ Note: You can add the following line toi the crontab using the (crontab -e) comm
 Our controller is designed so that it receives the text content and formatting through named pipes. 
 In other words, each time we need to write text from any external script or program, we have to write a special command inside a text file which is located, by default, in the following path:
 
-/tmp/lcd_pipe
+    /tmp/lcd_pipe
 
-For instance, if we would like to write the expression "Hello world" in the third line of our LCD display and align it to the center, we have to write the following command to the named pipe:  
-    3|2|Hello world
+For instance, if we would like to write the expression "Hello world" in the third line of our LCD display and align it to the center, we have to write the following text to the named pipe:  "3|2|Hello world"
 
 To do so, from a terminal, just execute the following command:
 
@@ -82,10 +81,12 @@ The general format of the command to write on the pipi file is as following:
  If you would like to fine tune the level of lightening, you have to use a resistance in the two pins of the I2C interface.
  
  1- To turn on the LCD backlight from external script, you have to write "backlight=on" to the named pipe :
-     echo "backlight=on" >> /tmp/lcd_pipe
+
+    echo "backlight=on" >> /tmp/lcd_pipe
 
 2- To turn off the LCD backlight from external script, you have to write "backlight=off" to the named pipe :
-     echo "backlight=off" >> /tmp/lcd_pipe
+
+    echo "backlight=off" >> /tmp/lcd_pipe
      
  # Can I refresh the LCD display content from external scripts?
  
