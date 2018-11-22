@@ -175,7 +175,7 @@ def main():
 				textCentering[lineNb]=sR[1]
 			if len(sR)==3: 
 				if lineNb==1:   				
-					cd_string(sR[2],LCD_LINE_1,style)				
+					lcd_string(sR[2],LCD_LINE_1,style)				
 				elif lineNb==2:
 					lcd_string(sR[2],LCD_LINE_2,style)
 				elif lineNb==3:
