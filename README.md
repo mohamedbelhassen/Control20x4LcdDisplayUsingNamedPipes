@@ -23,6 +23,7 @@ So, to use this project, you need the following components:
 
 Please, refer to the following link to see how should you connect the LCD display to Raspberry Pi:
 
+http://fahamni.tn/how-to-control-20x4-i2c-lcd-from-raspberry-pi-using-named-pipes/?fbclid=IwAR3Sr2v5P8bYnj4Xh6jjE_BWhnNhTJXuU8cIoVvJwPThUJiqxH0jBReQ5kQ
 
 # How to use this controller?
 
@@ -34,6 +35,13 @@ After that, you have to navigate to the folder containing "lcd_controller.py" fi
 
 Then, execute this file using the following command (in the same folder):
     ./lcd_controller.py
+
+## Note: 
+In order to be able to control I2C interface from Python and debugging the I2C interface, you need to install “i2c-tools” using the following commands:
+
+    sudo apt-get update
+    sudo apt-get install -y python-smbus i2c-tools
+
 
 ----------------------------------------------------------------------------------------------------------------------------------
 
