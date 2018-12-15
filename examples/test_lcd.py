@@ -1,4 +1,7 @@
 #!/usr/bin/python
+
+#this example show how to write text to the LCD by the means of the LCD named pipe from python scripts
+
 import cPickle
 import os
 #communicate with the LCD controller process through named pipe
