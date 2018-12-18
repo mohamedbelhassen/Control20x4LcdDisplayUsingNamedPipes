@@ -1,7 +1,6 @@
 #!/usr/bin/python
-import os
 
-#communicate with the LCD controller process through named pipe
+#this example show how to communicate with the LCD controller process through named pipe
 
 #if you have changed the path of the named path of your LCD display, update the following line
 pipePath = "/tmp/lcd_pipe"
