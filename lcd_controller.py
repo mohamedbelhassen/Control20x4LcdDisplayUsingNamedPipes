@@ -122,6 +122,12 @@ def refreshLCD():
 		lcd_string(lcdTextContent[4],LCD_LINE_4,int(textCentering[4]))
 	print "LCD display refreshed"
 
+def is_integer(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
 
 def main():
   # Main program block
@@ -167,6 +173,14 @@ def main():
 			if len(sR) != 3 :
 				print "incorrect number of fields %d  lineArgPassed: %s" % (len(sR), responseLines[i])			
 				continue
+			if is_integer(sR[0]) == False or sR[0]<1 or sR[0]>4:
+				print "you have to write valid line number in the LCD command"
+				continue
+
+			if is_integer(sR[1]) == False or sR[1]<1 or sR[1]>3:
+				print "you have to write valid align value in the LCD command"
+				continue
+
 			style = int(sR[1])
 			lineNb=int(sR[0])		
 
@@ -192,4 +206,3 @@ if __name__ == '__main__':
     pass
   finally:
     lcd_byte(0x01, LCD_CMD)
-
