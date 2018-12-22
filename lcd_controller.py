@@ -173,12 +173,14 @@ def main():
 			if len(sR) != 3 :
 				print "incorrect number of fields %d  lineArgPassed: %s" % (len(sR), responseLines[i])			
 				continue
-			if is_integer(sR[0]) == False or sR[0]<1 or sR[0]>4:
+			if is_integer(sR[0]) == False or int(sR[0])<1 or int(sR[0])>4:
 				print "you have to write valid line number in the LCD command"
+				print "1-the wrong LCD command is: "+responseLines[i]
 				continue
 
-			if is_integer(sR[1]) == False or sR[1]<1 or sR[1]>3:
+			if is_integer(sR[1]) == False or int(sR[1])<1 or int(sR[1])>3:
 				print "you have to write valid align value in the LCD command"
+				print "2-the wrong LCD command is: "+responseLines[i]
 				continue
 
 			style = int(sR[1])
