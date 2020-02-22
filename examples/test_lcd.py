@@ -9,8 +9,9 @@ pipePath = "/tmp/lcd_pipe"
 wp = open(pipePath, 'w')
 
 #write the expression "Your LCD is well configured" in the LCD display
-wp.write("2|2|your LCD")
-wp.write("3|2|is well configured")		
+#note: at the end of each line, you have to add a \n
+wp.write("2|2|your LCD\n")
+wp.write("3|2|is well configured\n")		
 
 #finally, close the file object
 wp.close()
